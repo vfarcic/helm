@@ -21,3 +21,5 @@ RUN apk add -U ca-certificates git && \
     chmod +x /usr/local/bin/kubectl && \
     apk del --purge deps && \
     rm /var/cache/apk/*
+
+RUN helm plugin install https://github.com/chartmuseum/helm-push
