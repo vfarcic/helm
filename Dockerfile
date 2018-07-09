@@ -6,11 +6,11 @@ LABEL org.label-schema.vcs-ref=$VCS_REF \
       org.label-schema.vcs-url="https://github.com/vfarcic/kubectl" \
       org.label-schema.docker.dockerfile="/Dockerfile"
 
-ENV HELM_LATEST_VERSION v2.8.2
-ENV KUBE_LATEST_VERSION v1.9.0
+ENV HELM_LATEST_VERSION v2.9.1
+ENV KUBE_LATEST_VERSION v1.10.0
 
-RUN apk add --update ca-certificates && \
-    apk add --update -t deps curl && \
+RUN apk add -U ca-certificates git && \
+    apk add -U -t deps curl && \
     curl -o helm.tar.gz https://storage.googleapis.com/kubernetes-helm/helm-${HELM_LATEST_VERSION}-linux-amd64.tar.gz && \
     tar -xvf helm.tar.gz && \
     mv linux-amd64/helm /usr/local/bin && \
