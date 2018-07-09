@@ -9,7 +9,7 @@ LABEL org.label-schema.vcs-ref=$VCS_REF \
 ENV HELM_LATEST_VERSION v2.9.1
 ENV KUBE_LATEST_VERSION v1.10.0
 
-RUN apk add -U ca-certificates git && \
+RUN apk add -U ca-certificates git curl && \
     apk add -U -t deps curl && \
     curl -o helm.tar.gz https://storage.googleapis.com/kubernetes-helm/helm-${HELM_LATEST_VERSION}-linux-amd64.tar.gz && \
     tar -xvf helm.tar.gz && \
@@ -22,6 +22,4 @@ RUN apk add -U ca-certificates git && \
     apk del --purge deps && \
     rm /var/cache/apk/*
 
-RUN mkdir $HELM_HOME/plugins
-
-RUN helm plugin install https://github.com/chartmuseum/helm-push
+RUN helm init --client-only
